@@ -9,9 +9,10 @@ import { Filter } from './Filter';
 import { ContactList } from './ContactList';
 
 export const App = () => {
-  const [contacts, setContact] = useState(
-    JSON.parse(window.localStorage.getItem('contacts' ?? '')),
-  );
+  const [contacts, setContact] = useState(() => {
+    // ленивая инициализация состояния - lazy initialization
+    return JSON.parse(window.localStorage.getItem('contacts' ?? ''));
+  });
   const [filtered, setFiltered] = useState('');
 
   useEffect(() => {
